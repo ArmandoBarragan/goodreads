@@ -50,7 +50,7 @@ END //
 
 DELIMITER ;
 
--- Search Users
+-- Query Users
 DELIMITER //
 
 CREATE PROCEDURE searchUsers(
@@ -91,7 +91,7 @@ END //
 
 DELIMITER ;
 
--- Search Books
+-- Query Books
 DELIMITER //
 
 CREATE PROCEDURE searchBooks(
@@ -102,6 +102,20 @@ BEGIN
     JOIN author a ON b.author_id = a.author_id
     WHERE b.title LIKE CONCAT('%', keyword, '%') OR
           a.author_name LIKE CONCAT('%', keyword, '%');
+END //
+
+DELIMITER ;
+
+-- Query every book of an author
+DELIMITER //
+
+CREATE PROCEDURE getBooksByAuthor(IN authorId INT)
+BEGIN
+    SELECT * FROM author a
+    JOIN
+        book b ON a.author_id = b.author_id
+    WHERE
+        a.author_id = authorId;
 END //
 
 DELIMITER ;
@@ -130,7 +144,7 @@ END //
 
 DELIMITER ;
 
--- Search Author
+-- Query Author
 DELIMITER //
 
 CREATE PROCEDURE searchAuthors(
@@ -139,6 +153,26 @@ CREATE PROCEDURE searchAuthors(
 BEGIN
     SELECT * FROM author
     WHERE author_name LIKE CONCAT('%', keyword, '%');
+END //
+
+DELIMITER ;
+
+
+-- Query authors with the ammount of books they have
+DELIMITER //
+
+CREATE PROCEDURE getAuthorsWithBookCount()
+BEGIN
+    SELECT
+        a.author_id,
+        a.author_name,
+        COUNT(b.book_id) AS book_count
+    FROM
+        author a
+    LEFT JOIN
+        book b ON a.author_id = b.author_id
+    GROUP BY
+        a.author_id;
 END //
 
 DELIMITER ;

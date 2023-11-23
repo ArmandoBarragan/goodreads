@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS book (
 -- file
 
 -- Create User
+DELIMITER //
+
 CREATE PROCEDURE createUser(
     IN p_username VARCHAR(255),
     IN p_email VARCHAR(255)
@@ -37,6 +39,8 @@ END //
 DELIMITER ;
 
 -- Delete User
+DELIMITER //
+
 CREATE PROCEDURE deleteUser(
     IN p_user_id INT
 )
@@ -47,6 +51,8 @@ END //
 DELIMITER ;
 
 -- Search Users
+DELIMITER //
+
 CREATE PROCEDURE searchUsers(
     IN keyword VARCHAR(255)
 )
@@ -59,6 +65,8 @@ END //
 DELIMITER ;
 
 -- Create Book
+DELIMITER //
+
 CREATE PROCEDURE createBook(
     IN p_title VARCHAR(255),
     IN p_author_id INT,
@@ -99,6 +107,8 @@ END //
 DELIMITER ;
 
 -- Create Author
+DELIMITER //
+
 CREATE PROCEDURE createAuthor(
     IN p_author_name VARCHAR(255)
 )
@@ -109,6 +119,8 @@ END //
 DELIMITER ;
 
 -- Delete Author
+DELIMITER //
+
 CREATE PROCEDURE deleteAuthor(
     IN p_author_id INT
 )

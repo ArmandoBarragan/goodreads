@@ -11,15 +11,14 @@ The project structure contains three directories:
 </ul>
 The compose folder contains the configurations required to create the containers. Within the db and goodreads folders that are inside this folder, it is needed that they have a .env file inside each one of them. The required .env files would look like the following:<br>
 
-<code>
-# /compose/db/
+<code># /compose/db/
 MYSQL_ROOT_PASSWORD=SUPER_SECRET_PASSWORD
 MYSQL_DATABASE=goodreads_db
 MYSQL_USER=mysqluser
 MYSQL_PASSWORD=SUPER_SECRET_PASSWORD
 </code>
-<code>
-# /compose/goodreads/
+
+<code># /compose/goodreads/
 SECRET_KEY=SUPER_SECRET_PASSWORD
 PORT=3000
 DATABASE_HOST=mysql

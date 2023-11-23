@@ -6,9 +6,11 @@ services:
       context: compose/db/
       dockerfile: DOCKERFILE
     env_file:
-      - ./compose/db/.env
-    ports:
-      - "3306:3306"
+      - ./compose/db/.env # Revisar si esta ruta debe ser relativa al contexto o al compose
+    expose:
+      - "3306"
+    command: ["mysqld"]
+
 
   nodejs:
     build:
@@ -16,7 +18,7 @@ services:
       dockerfile: compose/goodreads/DOCKERFILE
     container_name: nodejs-container
     env_file:
-      - ./compose/db/.env
+      - ./compose/goodreads/.env
     depends_on:
       - mysql
     ports:

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: compose/db/
+      dockerfile: DOCKERFILE
+    env_file:
+      - ./compose/db/.env
+    ports:
+      - "3306:3306"
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: compose/goodreads/DOCKERFILE
+    container_name: nodejs-container
+    env_file:
+      - ./compose/db/.env
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app

@@ -47,3 +47,6 @@ its GET endpoint, but I didn't have the time to create schemas for the other mod
 <li>Authentication: It is still needed to create a login endpoint that validates the requested user and password, as well as the middleware that checks the JWT.</li>
 <li>Other store procedure implementations: Every stored procedure is in the schema.sql file within the compose/db folder, but I didn't have time to implement most of them.</li>
 </ul>
+
+## Standart mismatching
+I am aware that the standart used in my structre is inconsistent, that is due to my lack of experience building solutions with this specific framework. However, I would adapt to any standart that is used among the company's developers. 

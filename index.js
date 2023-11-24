@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { PORT } = require("./config/settings")
+const settings = require("./config/settings")
 const companyRouter = require("./app/views/company")
 const userRouter = require("./app/views/user")
 const authorRouter = require("./app/views/author")
@@ -18,6 +18,6 @@ app.use("/user", userRouter);
 app.use("/author", authorRouter);
 app.use("/book", bookRoter);
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
+app.listen(settings.PORT, () => {
+  console.log(`Server listening at http://localhost:${settings.PORT}`);
 });

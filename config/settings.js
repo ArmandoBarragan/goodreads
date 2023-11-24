@@ -1,20 +1,15 @@
-const mysql = require('mysql2/promise');
+const settings = {
+    SECRET_KEY: process.env.SECRET_KEY,
 
+    PORT: process.env.PORT,
 
-const SECRET_KEY = process.env.SECRET_KEY;
-const PORT = process.env.PORT;
+    DATABASE_HOST: process.env.DATABASE_HOST,
+    DATABASE_USER: process.env.DATABASE_USER,
+    DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+    DATABASE_NAME: process.env.DATABASE_NAME,
+    DATABASE_WAIT_FOR_CONNECTIONS: process.env.DATABASE_WAIT_FOR_CONNECTIONS,
+    DATABASE_CONNECTION_LIMIT: process.env.DATABASE_CONNECTION_LIMIT,
+    DATABASE_QUEUE_LIMIT: process.env.DATABASE_QUEUE_LIMIT
+}
 
-
-const pool = mysql.createPool({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    waitForConnections: process.env.DATABASE_WAIT_FOR_CONNECTIONS,
-    connectionLimit: process.env.DATABASE_CONNECTION_LIMIT,
-    queueLimit: process.env.DATABASE_QUEUE_LIMIT
-});
-
-
-exports.dbPool = pool;
-exports.PORT = PORT;
+module.exports = settings;

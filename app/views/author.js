@@ -1,5 +1,6 @@
 const express = require('express');
-const { dbPool } = require("../../config/settings")
+
+const { dbPool } = require("../../config/db")
 
 const router = express.Router();
 
@@ -16,17 +17,25 @@ router.get("/:keyword?", async (req, res)=> {
 });
 
 
-router.delete("/:authorId", (req, res)=> {
-    const id = req.query.authorId;
+router.delete("/:authorId", async (req, res)=> {
+    const authorId = req.query.authorId;
+    if (typeof authorId != number){
+        res.status(400).json("El ID tiene que ser un número")
+    }
+    try {
+        await dbPool.query('CALL deleteAuthor(?)', [authorId])
+        res.status(204).json("Autor borrado exitosamente");
+    } catch (error) {
+        console.error('Error calling stored procedure:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 router.post("/", async (req, res)=> {
     const { authorName } = req.body;
-    console.log(req.body)
     try {
-        console.log(authorName)
         await dbPool.query('CALL createAuthor(?)', [authorName]);
-        res.json({ author: authorName });
+        res.status(201).json({ author: authorName });
     } catch (error) {
         console.error('Error calling stored procedure:', error);
         res.status(500).json({ error: 'Internal Server Error' });

@@ -20,8 +20,8 @@ router.get("/:keyword?", async (req, res)=> {
 
 
 router.delete("/:authorId", async (req, res)=> {
-    const authorId = req.query.authorId;
-    if (typeof authorId != number){
+    const authorId = req.params.authorId;
+    if (isNaN(authorId)){
         res.status(400).json("El ID tiene que ser un número")
     }
     try {

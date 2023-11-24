@@ -18,8 +18,8 @@ router.get("/:keyword?", async (req, res)=> {
     }
 });
 
-
 router.delete("/:authorId", async (req, res)=> {
+    // Delete an author.
     const authorId = req.params.authorId;
     if (isNaN(authorId)){
         res.status(400).json("El ID tiene que ser un número")
@@ -34,6 +34,7 @@ router.delete("/:authorId", async (req, res)=> {
 });
 
 router.post("/", async (req, res)=> {
+    // Create an author.
     const { authorName } = req.body;
     try {
         await dbPool.query('CALL createAuthor(?)', [authorName]);
@@ -44,8 +45,15 @@ router.post("/", async (req, res)=> {
     }
 });
 
-router.get("/authors", (req, res) => {
-
+router.get("/get-book-count", async (req, res) => {
+    // Get the authors of the database and the ammount of books they have registered.
+    try {
+        const [rows] = await dbPool.query('CALL getAuthorsWithBookCount()');
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error calling stored procedure:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 module.exports = router;

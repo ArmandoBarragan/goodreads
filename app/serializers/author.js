@@ -2,8 +2,8 @@ const serialize = require('serialize-javascript');
 
 function serializeAuthor(author) {
   return {
-    id: author.id,
-    authorName: author.authorName,
+    id: author.author_id,
+    authorName: author.author_name,
   };
 }
 

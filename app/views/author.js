@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { dbPool } = require("../../config/db")
+const { serializeAuthors } = require("../serializers/author")
 
 const router = express.Router();
 
@@ -9,7 +10,8 @@ router.get("/:keyword?", async (req, res)=> {
     const keyword = req.query.keyword || "";
     try {
         const [rows] = await dbPool.query('CALL searchAuthors(?)', [keyword]);
-        res.json({ authors: rows[0] });
+        const serializedAuthors = serializeAuthors(rows[0]);
+        res.json({ authors: serializedAuthors });
     } catch (error) {
         console.error('Error calling stored procedure:', error);
         res.status(500).json({ error: 'Internal Server Error' });

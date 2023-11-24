@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS goodreads;
-USE goodreads;
+CREATE DATABASE IF NOT EXISTS goodreads_db;
+USE goodreads_db;
 
 CREATE TABLE IF NOT EXISTS user (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -109,7 +109,9 @@ DELIMITER ;
 -- Query every book of an author
 DELIMITER //
 
-CREATE PROCEDURE getBooksByAuthor(IN authorId INT)
+CREATE PROCEDURE getBooksByAuthor(
+    IN authorId INT
+)
 BEGIN
     SELECT * FROM author a
     JOIN
@@ -144,7 +146,7 @@ END //
 
 DELIMITER ;
 
--- Query Author
+-- Query Authors
 DELIMITER //
 
 CREATE PROCEDURE searchAuthors(

@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -16,5 +16,5 @@ const pool = mysql.createPool({
 });
 
 
-exports.dbPool = pool.promise();
+exports.dbPool = pool;
 exports.PORT = PORT;
